@@ -709,7 +709,11 @@ public class SegmentLoader {
                         // We assume that all values are Comparable. Boolean
                         // wasn't Comparable until JDK 1.5, but we can live with
                         // that bug because JDK 1.4 is no longer important.
+                    	try {
                         axisValueSets[axisIndex].add((Comparable) o);
+                    	} catch (Exception e) {
+                    		axisValueSets[axisIndex].add(o.toString());
+                    	}
                     }
                     processedRows.setObject(columnIndex, o);
                     break;
