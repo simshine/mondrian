@@ -491,7 +491,14 @@ public class Util extends XOMUtil {
             k1 = k1.toString();
             k2 = k2.toString();
         }
-        return ((Comparable) k1).compareTo(k2);
+        try {
+        	return ((Comparable) k1).compareTo(k2);
+        } catch(Exception e) {
+        	e.printStackTrace();
+        	k1 = k1.toString();
+            k2 = k2.toString();
+            return ((Comparable) k1).compareTo(k2);
+        }
     }
 
     /**
