@@ -205,6 +205,7 @@ public class PropertyUtil {
                 out.println("package mondrian.olap;");
                 out.println();
                 out.println("import org.eigenbase.util.property.*;");
+                out.println("import com.techstar.vbi.util.property.*;");
                 out.println("import java.io.File;");
                 out.println();
 
@@ -257,7 +258,7 @@ public class PropertyUtil {
                         "    public transient final "
                         + def.propertyType.className + " " + def.name + " =");
                     out.println(
-                        "        new " + def.propertyType.className + "(");
+                        "        new VBI" + def.propertyType.className + "(");//edit by liujie 2018/10/22 15:39
                     out.println(
                         "            this, \"" + def.path + "\", "
                         + "" + def.defaultJava() + ");");
