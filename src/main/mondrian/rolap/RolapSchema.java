@@ -403,7 +403,8 @@ public class RolapSchema implements Schema {
      */
     protected void load(String catalogUrl, String catalogStr) {
         try {
-            final Parser xmlParser = XOMUtil.createDefaultParser();
+//            final Parser xmlParser = XOMUtil.createDefaultParser();
+            final Parser xmlParser = new org.eigenbase.xom.wrappers.JaxpDOMParser();
 
             final DOMWrapper def;
             if (catalogStr == null) {
