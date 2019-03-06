@@ -826,6 +826,7 @@ public interface Dialect {
         DB2_OLD_AS400,
         DB2_AS400,
         DB2,
+        DM,
         FIREBIRD,
         GREENPLUM,
         HIVE,

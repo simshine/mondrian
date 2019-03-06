@@ -1048,6 +1048,8 @@ public class JdbcDialectImpl implements Dialect {
                 // DB2 on NT returns "DB2/NT"
                 return DatabaseProduct.DB2;
             }
+        } else if (upperProductName.trim().equals("DM DBMS")) {
+        	return DatabaseProduct.DM;
         } else if (upperProductName.indexOf("FIREBIRD") >= 0) {
             return DatabaseProduct.FIREBIRD;
         } else if (upperProductName.equals("HIVE")
