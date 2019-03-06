@@ -350,7 +350,12 @@ public class JavaFunDef extends FunDefBase {
             } catch (IllegalAccessException e) {
                 throw newEvalException(e);
             } catch (InvocationTargetException e) {
-                throw newEvalException(e.getCause());
+//            	throw newEvalException(e.getCause());//wangshengqiang
+            	if(e.getCause().toString().contains("empty String") || e.getCause().toString().contains("#null")){
+            		return nullValue;
+            	}else{
+            		throw newEvalException(e.getCause());
+            	}
             } catch (IllegalArgumentException e) {
                 if (e.getMessage().equals("argument type mismatch")) {
                     StringBuilder buf =
