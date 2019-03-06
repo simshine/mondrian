@@ -79,13 +79,30 @@ public class Vba {
         if (expression instanceof Date) {
             return (Date) expression;
         } else if (expression == null) {
-            return null;
+        	return null;
+        } else if (str != null&&str.toUpperCase().contains("ALL")) {
+        	return null;
+        } else if (str != null&&str.equalsIgnoreCase("#null")) {
+        	return null;
         } else {
             // note that this currently only supports a limited set of dates and
             // times
             // "October 19, 1962"
             // "4:35:47 PM"
             try {
+            	try {
+            		long val_time = 0L;
+	            	if (str.contains("E")) {//liujie
+                    	String[] val_part = str.split("E");
+            			double val_left = Double.parseDouble(val_part[0]);
+            			long val_right = (long) Math.pow(10, Integer.parseInt(val_part[1]));
+            			val_time = (long)(val_left*val_right);
+	            	} else {
+	            		val_time = Long.parseLong(str);
+	            	}
+	            	Date date = new Date(val_time);
+                	return date;
+            	} catch (Exception ex3) {}
                 return DateFormat.getTimeInstance().parse(str);
             } catch (ParseException ex0) {
                 try {
