@@ -162,6 +162,12 @@ public class OracleDialect extends JdbcDialectImpl {
         final int precision = metaData.getPrecision(columnIndex + 1);
         final int scale = metaData.getScale(columnIndex + 1);
         final String columnName = metaData.getColumnName(columnIndex + 1);
+        ///addby liujie 2018-06-22 10:27
+        if ((columnType == Types.NUMERIC || columnType == Types.DECIMAL) && 
+	        scale == -127 && precision ==0){
+	        return SqlStatement.Type.DOUBLE;
+        }
+        /// addedby
         SqlStatement.Type type;
 
         if (columnType == Types.NUMERIC || columnType == Types.DECIMAL) {
