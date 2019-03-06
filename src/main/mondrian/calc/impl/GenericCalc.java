@@ -88,7 +88,11 @@ public abstract class GenericCalc
     public String evaluateString(Evaluator evaluator) {
         final Object o = evaluate(evaluator);
         try {
-            return (String) o;
+        	if (o==null) {
+        		return null;
+        	} else {
+        		return o.toString();
+        	}
         } catch (ClassCastException e) {
             throw evaluator.newEvalException(null, msg(TypeEnum.STRING, o));
         }
