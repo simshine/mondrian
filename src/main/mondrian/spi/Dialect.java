@@ -821,6 +821,7 @@ public interface Dialect {
      */
     enum DatabaseProduct {
         ACCESS,
+        CLICKHOUSE,
         UNKNOWN,
         DERBY,
         DB2_OLD_AS400,

@@ -1021,6 +1021,8 @@ public class JdbcDialectImpl implements Dialect {
         final String upperProductName = productName.toUpperCase();
         if (productName.equals("ACCESS")) {
             return DatabaseProduct.ACCESS;
+        } else if (upperProductName.trim().equals("CLICKHOUSE")) {
+            return DatabaseProduct.CLICKHOUSE;
         } else if (upperProductName.trim().equals("APACHE DERBY")) {
             return DatabaseProduct.DERBY;
         } else if (upperProductName.trim().equals("DBMS:CLOUDSCAPE")) {

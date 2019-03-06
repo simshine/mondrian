@@ -14,6 +14,7 @@ import mondrian.olap.*;
 import mondrian.rolap.*;
 import mondrian.spi.Dialect;
 import mondrian.spi.DialectManager;
+import mondrian.spi.impl.ClickHouseDialect;
 import mondrian.util.Pair;
 
 import java.util.*;
@@ -656,6 +657,16 @@ public class SqlQuery {
     public void toBuffer(StringBuilder buf, String prefix) {
         final String first = distinct ? "select distinct " : "select ";
         select.toBuffer(buf, generateFormattedSql, prefix, first, ", ", "", "");
+        if (dialect instanceof ClickHouseDialect) {
+	        String selStr = buf.toString().replaceAll("sum\\(", "sumIf(")
+	        		.replaceAll("count\\(", "countIf(")
+	        		.replaceAll("min\\(", "minIf(")
+	        		.replaceAll("max\\(", "maxIf(")
+	        		.replaceAll("avg\\(", "avgIf(")
+	        		.replaceAll("countIf\\(distinct", "count\\(distinct");
+	        buf.setLength(0);
+	        buf.append(selStr);
+        }
         groupingFunctionsToBuffer(buf, prefix);
         from.toBuffer(
             buf, generateFormattedSql, prefix, " from ", ", ", "", "");
